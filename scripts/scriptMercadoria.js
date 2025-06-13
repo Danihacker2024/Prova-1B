@@ -38,6 +38,7 @@ function calcularAliquota(evento){
             alert("País ou mercadoria já cadastrada")
         }
         formulario.reset();
+        mostrarTabela();
     } else {
         formulario.classList.add('was-validated');
     }
@@ -47,6 +48,7 @@ function calcularAliquota(evento){
 
 function mostrarTabela(){
     const divTabela = document.getElementById("tabela");
+    divTabela.innerHTML="";
     const id = localStorage.getItem("id");
     if(id=="0"){
         divTabela.innerHTML="<p class='alert alert-info text-center'>Não há paises e mercadorias cadastradas</p>";
@@ -79,6 +81,14 @@ function mostrarTabela(){
         tabela.appendChild(corpo);
         divTabela.appendChild(tabela);
     }
+}
+
+function excluir(i){
+    localStorage.removeItem(i);
+    var id = localStorage.getItem("id");
+    id=parseInt(id)-1;
+    localStorage.setItem("id",id);
+    mostrarTabela();
 }
 
 mostrarTabela();
